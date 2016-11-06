@@ -1,0 +1,115 @@
+.note--container
+    z-index 999
+    position fixed
+    top 8px
+    right 8px
+    padding 4px
+    width 350px
+    max-width 98%
+    font-family "Segoe UI", "Tahoma", "Calibri", "Verdana", sans-serif
+    color #999
+    box-sizing border-box
+
+@keyframes noteFadeIn
+    0%
+        opacity 0
+
+    100%
+        opacity 1
+
+@keyframes noteFadeOut
+    0%
+        opacity 1
+
+    100%
+        opacity 0
+
+.note
+    position relative
+    fill white
+    color white
+    border 1px solid rgba(0,0,0,0.03)
+    border-left 4px solid rgba(0,0,0,0.2)
+    box-shadow 0 1px 10px 0 rgba(0,0,0,.1), 0 2px 15px 0 rgba(0,0,0,.05)
+    opacity 0
+    padding 8px
+    animation noteFadeOut cubic-bezier(0.23, -0.39, 0, 1.38) 0.5s
+
+    &.shown
+        animation noteFadeIn cubic-bezier(0.23, -0.39, 0, 1.38) 1s
+
+        margin-bottom 12px
+        min-height 62px
+        opacity 1
+
+        .note--close, .note--title, .note--body
+            display block
+
+    &.note--info
+        background #3498db
+
+    &.note--success
+        background #2ECC71
+
+    &.note--warning
+        background #FFDB70
+        color alpha(black, 0.7)
+        fill alpha(black, 0.7)
+
+    &.note--error
+        background #ec4e4e
+
+    .note--close
+        z-index 9
+        position absolute
+        top 9px
+        right 0
+        width 16px
+        height 16px
+        padding 4px
+        text-align center
+        text-decoration none
+        color inherit
+        fill inherit
+        font-weight bold
+        font-size 16px
+
+        outline none
+        border none
+        border-radius 50%
+        cursor pointer
+        transition .1s ease
+
+        &:hover
+            color alpha(black, 0.5)
+            fill alpha(black, 0.5)
+
+        svg
+            cursor pointer
+            width 14px
+
+            path
+                fill inherit
+
+    .note--title
+        margin 0
+        padding 0
+        margin-bottom 4px
+        font-size 20px
+        font-weight 600
+        color inherit
+        opacity 0.9
+
+        svg
+            margin-right 4px
+            line-height 20px
+            width 17px
+            height 17px
+
+
+    .note--body
+        font-size 16px
+        font-weight 300
+        color inherit
+        margin 0.5em 0
+

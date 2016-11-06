@@ -16,7 +16,6 @@ const Note = function (config) {
 
         self.config = {
             duration: 4,
-            showIcon: true,
             closeIcon: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17"> <g> </g> <path d="M9.207 8.5l6.646 6.646-0.707 0.707-6.646-6.646-6.646 6.646-0.707-0.707 6.646-6.646-6.647-6.646 0.707-0.707 6.647 6.646 6.646-6.646 0.707 0.707-6.646 6.646z" /></svg>'
         };
 
@@ -28,6 +27,10 @@ const Note = function (config) {
     function build() {
         self.container = createElement("div", "note--container");
         document.body.appendChild(self.container);
+    }
+
+    function destroy() {
+        document.body.removeChild(self.container);
     }
 
     function showGeneric(type, title, text, config) {
@@ -48,11 +51,7 @@ const Note = function (config) {
         if (title)
             noteFragment.appendChild(createElement("h2", "note--title", title));
 
-
-
         noteFragment.appendChild(createElement("p", "note--body", text));
-
-
 
         note.appendChild(noteFragment);
         self.container.appendChild(note);
@@ -89,7 +88,8 @@ const Note = function (config) {
         info: (title, text, config) => showGeneric("info", title, text, config),
         notify: (title, text, config) => showGeneric("default", title, text, config),
         error: (title, text, config) => showGeneric("error", title, text, config),
-        warn: (title, text, config) => showGeneric("warning", title, text, config)
+        warn: (title, text, config) => showGeneric("warning", title, text, config),
+        destroy: destroy
     };
 
 }

@@ -1,24 +1,21 @@
 {
-  "name": "Note.js",
-  "description": "A lightweight and elegant notifications library",
-  "main": "",
+  "name": "Note.js - docs",
+  "homepage": "https://chmln.github.io/Note.js",
   "authors": [
     "Gregory <gregory.mkv@gmail.com>"
   ],
+  "description": "Docs for Note.js",
+  "main": "",
   "license": "MIT",
-  "keywords": [
-    "javascript",
-    "notifications",
-    "notification",
-    "library",
-    "lightweight",
-    "simple"
-  ],
-  "homepage": "https://github.com/chmln/Note.js",
-  "main": ["dist/note.min.js","dist/note.css"],
-  "moduleType": [],
+  "private": true,
   "ignore": [
     "**/.*",
-    "node_modules"
-  ]
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Note.js": "git://github.com/chmln/Note.js.git#master"
+  }
 }

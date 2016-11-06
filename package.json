@@ -1,47 +1,26 @@
 {
-  "name": "Note.js",
-  "version": "0.0.3",
-  "description": "A lightweight and elegant notifications library",
-  "main": "dist/note.js",
+  "name": "note.js_docs",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "build": "npm run build--script && npm run build--style",
-    "build--script": "cross-env NODE_ENV=production babel src/note.js --out-file dist/note.min.js",
-    "build--style": "stylus --out dist --compress src/note.styl",
-    "dev--script": "babel src/note.js --watch --out-file dist/note.js",
-    "dev--style": "stylus --out dist --compress --watch src/note.styl",
-    "dev": "parallelshell 'npm run dev--script' 'npm run dev--style'",
-    "livereload": "livereload 'dist'",
-    "serve": "parallelshell 'http-server -o --silent' 'npm run livereload'",
-    "start": "parallelshell 'npm run dev' 'npm run serve'"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-preset-babili": "^0.0.8",
-    "babel-plugin-transform-remove-strict-mode": "0.0.2",
-    "babel-preset-es2015": "^6.18.0",
-    "cross-env": "^3.1.3",
-    "http-server": "^0.9.0",
-    "livereload": "^0.6.0",
-    "parallelshell": "^2.0.0",
-    "stylus": "^0.54.5"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chmln/Note.js.git"
   },
-  "author": "Gregory",
+  "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/chmln/Note.js/issues"
   },
-  "homepage": "https://github.com/chmln/Note.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/chmln/Note.js.git"
+  "homepage": "https://github.com/chmln/Note.js#readme",
+  "dependencies": {
+    "http-server": "^0.9.0",
+    "livereload": "^0.6.0",
+    "pug": "^2.0.0-beta6",
+    "stylus": "^0.54.5"
   },
-  "keywords": [
-    "javascript",
-    "notifications",
-    "notification",
-    "library",
-    "lightweight",
-    "simple"
-  ]
+  "devDependencies": {},
+  "description": ""
 }

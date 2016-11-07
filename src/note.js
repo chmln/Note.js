@@ -71,9 +71,7 @@ const Note = function (config) {
         note.addEventListener("animationend", onAnimationEnd);
 
         if (!noteConfig.stick && !self.config.stick)
-            setTimeout(function(){
-                self.innerContainer.removeChild(note);
-            }, (noteConfig.duration || self.config.duration) * 1000);
+            setTimeout(hide, (noteConfig.duration || self.config.duration) * 1000);
 
         return {
             hide: hide,

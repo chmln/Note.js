@@ -1,8 +1,6 @@
 .note--container
     z-index 999
     position fixed
-    top 8px
-    right 8px
     padding 4px
     width 350px
     max-width 98%
@@ -10,19 +8,33 @@
     color #999
     box-sizing border-box
 
-@keyframes noteFadeIn
-    0%
-        opacity 0
+    &.topLeft
+        top 8px
+        left 8px
 
-    100%
-        opacity 1
+    &.topRight
+        top 8px
+        right 8px
 
-@keyframes noteFadeOut
-    0%
-        opacity 1
+    &.bottomRight
+        bottom 8px
+        right 8px
 
-    100%
-        opacity 0
+        .note-inner
+            flex-direction column-reverse
+
+    &.bottomLeft
+        bottom 8px
+        left 8px
+
+        .note-inner
+            flex-direction column-reverse
+
+
+
+.note--inner
+    display flex
+    flex-direction column
 
 .note
     position relative
@@ -33,7 +45,8 @@
     box-shadow 0 1px 10px 0 rgba(0,0,0,.1), 0 2px 15px 0 rgba(0,0,0,.05)
     opacity 0
     padding 8px
-    animation noteFadeOut cubic-bezier(0.23, -0.39, 0, 1.38) 0.5s
+    animation noteFadeOut cubic-bezier(0.23, -0.39, 0, 1.38) 0.75s
+    width 100%
 
     &.shown
         animation noteFadeIn cubic-bezier(0.23, -0.39, 0, 1.38) 1s
@@ -113,3 +126,16 @@
         color inherit
         margin 0.5em 0
 
+@keyframes noteFadeIn
+    0%
+        opacity 0
+
+    100%
+        opacity 1
+
+@keyframes noteFadeOut
+    0%
+        opacity 1
+
+    100%
+        opacity 0

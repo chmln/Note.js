@@ -17,8 +17,8 @@
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.18.0",
-    "babel-preset-babili": "^0.0.8",
     "babel-plugin-transform-remove-strict-mode": "0.0.2",
+    "babel-preset-babili": "^0.0.8",
     "babel-preset-es2015": "^6.18.0",
     "cross-env": "^3.1.3",
     "http-server": "^0.9.0",
@@ -32,9 +32,9 @@
     "url": "https://github.com/chmln/Note.js/issues"
   },
   "homepage": "https://github.com/chmln/Note.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/chmln/Note.js.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chmln/Note.js.git"
   },
   "keywords": [
     "javascript",

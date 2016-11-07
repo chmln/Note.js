@@ -1,7 +1,10 @@
 {
   "name": "Note.js",
   "description": "A lightweight and elegant notifications library",
-  "main": "",
+  "main": [
+    "dist/note.min.js",
+    "dist/note.css"
+  ],
   "authors": [
     "Gregory <gregory.mkv@gmail.com>"
   ],
@@ -15,7 +18,6 @@
     "simple"
   ],
   "homepage": "https://github.com/chmln/Note.js",
-  "main": ["dist/note.min.js","dist/note.css"],
   "moduleType": [],
   "ignore": [
     "**/.*",

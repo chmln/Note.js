@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "parallelshell 'npm run dev-html' 'npm run dev-style'",
+    "dev-html": "pug --watch site/index.pug --out ./",
+    "dev-style": "stylus --out assets --compress --watch site/style.styl",
+    "livereload": "livereload ''",
+    "serve": "parallelshell 'http-server -o --silent' 'npm run livereload'",
+    "start": "parallelshell 'npm run dev' 'npm run serve'"
   },
   "repository": {
     "type": "git",
@@ -16,11 +21,15 @@
   },
   "homepage": "https://github.com/chmln/Note.js#readme",
   "dependencies": {
+    "normalize.css": "^5.0.0",
+    "reset-css": "^2.2.0"
+  },
+  "devDependencies": {
     "http-server": "^0.9.0",
     "livereload": "^0.6.0",
+    "parallelshell": "^2.0.0",
     "pug": "^2.0.0-beta6",
     "stylus": "^0.54.5"
   },
-  "devDependencies": {},
   "description": ""
 }

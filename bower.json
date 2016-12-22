@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "Note.js": "git://github.com/chmln/Note.js.git#master"
+    "Note.js": "git://github.com/chmln/Note.js.git#master",
+    "bulma": "^0.2.3"
   }
 }

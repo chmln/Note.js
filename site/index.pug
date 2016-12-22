@@ -1,0 +1,99 @@
+doctype html
+html(lang='en')
+    head
+        title Note.js - javascript notifications library
+        meta(charset='utf-8')
+        meta(http-equiv='x-ua-compatible', content='ie=edge')
+        //link(rel='icon', type='image/png', href='favicon.png')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes')
+
+        link(rel='stylesheet', type='text/css', href='bower_components/Note.js/dist/note.css')
+        link(rel='stylesheet', type='text/css', href='assets/style.css')
+
+    body
+        section.hero.is-medium.is-bold
+            .hero-body
+                .container
+                    h2.title#logo Note.js
+                    h4.subtitle
+                        | Lightweight, elegant notifications
+
+                    div
+                        a.button.outlined.success(onclick="success()") Success
+                        a.button.outlined.info(onclick="info()") Information
+                        a.button.outlined.warning(onclick="warning()") Warning
+                        a.button.outlined.danger(onclick="error()") Error (sticky)
+
+
+        .box
+
+            .container
+
+                .content
+                    h4 Getting Started
+                    p
+                        pre
+                            code.hljs.lang-bash npm install Note.js --save // npm
+
+                        pre
+                            code.hljs.lang-bash bower install Note.js --save // bower
+                    p
+                        pre
+                            code.
+                                // Start by creating an instance. Overriding default config is optional
+                                const note = new Note({}); // Note
+
+                    p Then,
+                        pre
+                            code.
+                                note.success(title, content, config);
+                                note.info(title, content, config);
+                                note.warning(title, content, config);
+                                note.error(title, content, config);
+
+                        | Where:
+                        ul
+                        li
+                            code title
+                            |&nbsp;can be omitted by passing in null or an empty String;
+                        li
+                            code content
+                            |&nbsp;can be a string (incl. HTML), or an HTML Element, and&nbsp;
+                        li
+                            code config
+                            |&nbsp;is an object
+
+                    h4 Per-Notification Config Options
+                    pre
+                        code.json.
+                            {
+                                sticky: false // or true
+                            }
+
+
+        script(src='bower_components/Note.js/dist/note.js')
+        script(src='assets/highlight/highlight.pack.js')
+        script.
+            var note = new Note({
+                position: "topRight"
+            }), c;
+            function success() {
+                note.success("Success", "Something went great!");
+            }
+
+            function info() {
+                note.info("Info", "Something happened.");
+            }
+
+            function warning() {
+                note.warn("Warning", "Something might go wrong.");
+            }
+
+            function error() {
+                note.error("Error", "Something went wrong.", {
+                    sticky: true
+                });
+            }
+        script.
+            hljs.initHighlighting();
+

@@ -1,22 +1,32 @@
 const Note = function (config) {
     const self = this;
 
-    function createElement(node, className, html) {
+    function createElement(node, className, content) {
         let e = document.createElement(node);
         if (className)
             e.className = className;
 
-        if (html)
-            e.innerHTML = html;
+        if (content) {
+            if (typeof content === "string")
+                e.innerHTML = content;
+
+            else if (content.nodeName)
+                e.appendChild(content);
+        }
+
         return e;
     }
 
     function init() {
+        parseConfig();
         build();
+    }
 
+    function parseConfig() {
         self.config = {
             duration: 4,
-            closeIcon: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17"> <g> </g> <path d="M9.207 8.5l6.646 6.646-0.707 0.707-6.646-6.646-6.646 6.646-0.707-0.707 6.646-6.646-6.647-6.646 0.707-0.707 6.647 6.646 6.646-6.646 0.707 0.707-6.646 6.646z" /></svg>'
+            position: "bottomRight",
+            closeIcon: '<svg viewbox="0 0 40 40"><path d="M 10,10 L 30,30 M 30,10 L 10,30" /></svg>'
         };
 
         if (config)
@@ -25,7 +35,9 @@ const Note = function (config) {
     }
 
     function build() {
-        self.container = createElement("div", "note--container");
+        self.container = createElement("div", "note--container " + self.config.position);
+        self.innerContainer = createElement("div", "note--inner");
+        self.container.appendChild(self.innerContainer);
         document.body.appendChild(self.container);
     }
 
@@ -33,48 +45,51 @@ const Note = function (config) {
         document.body.removeChild(self.container);
     }
 
-    function showGeneric(type, title, text, config) {
+    function showGeneric(type, title, content, noteConfig) {
         // {
         //     type: ["info", "success", "error", "warning"],
         //     title: "",
-        //     text: ""
+        //     content: ""
         // }
 
-        config = config || {};
+        noteConfig = noteConfig || {};
 
-        let note = createElement("div", "note shown note--" + type);
+        let note = createElement("div", `note shown note--${type}`);
         let noteFragment = document.createDocumentFragment(),
-            noteCloseButton = createElement("div", "note--close", self.config.closeIcon);
+            noteCloseButton = createElement("div", "note--close", self.config.closeIcon),
+            noteContent = createElement("div", "note--content");
 
+        if (title) {
+            note.classList.add("hasTitle");
+            noteContent.appendChild(createElement("h2", "note--title", title));
+        }
+
+        noteContent.appendChild(createElement("p", "note--body", content));
+
+
+        noteFragment.appendChild(noteContent);
         noteFragment.appendChild(noteCloseButton);
 
-        if (title)
-            noteFragment.appendChild(createElement("h2", "note--title", title));
-
-        noteFragment.appendChild(createElement("p", "note--body", text));
-
         note.appendChild(noteFragment);
-        self.container.appendChild(note);
+        self.innerContainer.appendChild(note);
 
-        let onAnimationEnd = e => !note.classList.contains("shown") && (self.container.removeChild(note));
+        let onAnimationEnd = e => !note.classList.contains("shown") && (self.innerContainer.removeChild(note));
         let hide = () => {
             note.classList.remove("shown");
         };
 
-        noteCloseButton.addEventListener("click", hide);
+        note.addEventListener("click", hide);
         note.addEventListener("animationend", onAnimationEnd);
 
-        if (!config.stick && !self.config.stick)
-            setTimeout(function(){
-                self.container.removeChild(note);
-            }, (config.duration || self.config.duration) * 1000);
+        if (!noteConfig.sticky && !self.config.sticky)
+            setTimeout(hide, (noteConfig.duration || self.config.duration) * 1000);
 
         return {
             hide: hide,
 
             show: function (){
                 if (!note.parentNode)
-                    self.container.appendChild(note);
+                    self.innerContainer.appendChild(note);
                 note.classList.add("shown");
             }
         }
@@ -89,7 +104,7 @@ const Note = function (config) {
         notify: (title, text, config) => showGeneric("default", title, text, config),
         error: (title, text, config) => showGeneric("error", title, text, config),
         warn: (title, text, config) => showGeneric("warning", title, text, config),
-        destroy: destroy
+        destroy
     };
 
 }

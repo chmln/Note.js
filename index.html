@@ -1,78 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Note.js</title>
-	<link rel="stylesheet" href="dist/note.css">
-	<script src="dist/note.js"></script>
-	<style>
-    * {
-        box-sizing: border-box;
-    }
-.Aligner {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    height: 50vh;
-
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center
+<!DOCTYPE html><html lang="en"><head><title>Note.js - javascript notifications library</title><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><!--link(rel='icon', type='image/png', href='favicon.png')--><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes"><link rel="stylesheet" type="text/css" href="bower_components/Note.js/dist/note.css"><link rel="stylesheet" type="text/css" href="assets/style.css"></head><body><section class="hero is-medium is-bold"><div class="hero-body"><div class="container"><h2 class="title" id="logo">Note.js</h2><h4 class="subtitle">Lightweight, elegant notifications</h4><div><a class="button outlined success" onclick="success()">Success</a><a class="button outlined info" onclick="info()">Information</a><a class="button outlined warning" onclick="warning()">Warning</a><a class="button outlined danger" onclick="error()">Error (sticky)</a></div></div></div></section><div class="box"><div class="container"><div class="content"><h4>Getting Started</h4><p><pre><code class="hljs lang-bash">npm install Note.js --save // npm</code></pre><pre><code class="hljs lang-bash">bower install Note.js --save // bower</code></pre></p><p><pre><code>// Start by creating an instance. Overriding default config is optional
+const note = new Note({}); // Note
+</code></pre></p><p>Then,<pre><code>note.success(title, content, config);
+note.info(title, content, config);
+note.warning(title, content, config);
+note.error(title, content, config);
+</code></pre>Where:<ul></ul><li><code>title</code>&nbsp;can be omitted by passing in null or an empty String;</li><li><code>content</code>&nbsp;can be a string (incl. HTML), or an HTML Element, and&nbsp;</li><li><code>config</code>&nbsp;is an object</li></p><h4>Per-Notification Config Options</h4><pre><code class="json">{
+    sticky: false // or true
 }
 
-.Aligner-item {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    margin-left: -250px;
+</code></pre></div></div></div><script src="bower_components/Note.js/dist/note.js"></script><script src="assets/highlight/highlight.pack.js"></script><script>var note = new Note({
+    position: "topRight"
+}), c;
+function success() {
+    note.success("Success", "Something went great!");
 }
 
-	</style>
-</head>
-<body>
+function info() {
+    note.info("Info", "Something happened.");
+}
 
-	<div class=Aligner>
-		<div class=Aligner-item>
-			<button onclick="success()">Success</button>
-            <button onclick="info()">info</button>
-            <button onclick="warning()">warning</button>
-            <button onclick="error()">error</button>
-		</div>
-	</div>
+function warning() {
+    note.warn("Warning", "Something might go wrong.");
+}
 
-	<script>
-    var note = new Note(), c;
-	function success() {
-        note.success("Success", "Something went great!", {
-            stick: true
-        });
-    }
-
-    function info() {
-        note.info("Info", "Something happened.", {
-            stick: true
-        });
-    }
-
-    function warning() {
-        note.warn("Warning", "Something might go wrong.", {
-            stick: true
-        });
-    }
-
-    function error() {
-        note.error("Error", "Something went wrong.", {
-            stick: true
-        });
-    }
-	</script>
-</body>
-</html>
+function error() {
+    note.error("Error", "Something went wrong.", {
+        sticky: true
+    });
+}</script><script>hljs.initHighlighting();</script></body></html>

@@ -1,11 +1,14 @@
 var Note = function Note(config) {
     var self = this;
 
-    function createElement(node, className, html) {
+    function createElement(node, className, content) {
         var e = document.createElement(node);
         if (className) e.className = className;
 
-        if (html) e.innerHTML = html;
+        if (content) {
+            if (typeof content === "string") e.innerHTML = content;else if (content.nodeName) e.appendChild(content);
+        }
+
         return e;
     }
 
@@ -18,7 +21,7 @@ var Note = function Note(config) {
         self.config = {
             duration: 4,
             position: "bottomRight",
-            closeIcon: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17"> <g> </g> <path d="M9.207 8.5l6.646 6.646-0.707 0.707-6.646-6.646-6.646 6.646-0.707-0.707 6.646-6.646-6.647-6.646 0.707-0.707 6.647 6.646 6.646-6.646 0.707 0.707-6.646 6.646z" /></svg>'
+            closeIcon: '<svg viewbox="0 0 40 40"><path d="M 10,10 L 30,30 M 30,10 L 10,30" /></svg>'
         };
 
         if (config) for (var opt in config) {
@@ -37,24 +40,29 @@ var Note = function Note(config) {
         document.body.removeChild(self.container);
     }
 
-    function showGeneric(type, title, text, noteConfig) {
+    function showGeneric(type, title, content, noteConfig) {
         // {
         //     type: ["info", "success", "error", "warning"],
         //     title: "",
-        //     text: ""
+        //     content: ""
         // }
 
         noteConfig = noteConfig || {};
 
         var note = createElement("div", "note shown note--" + type);
         var noteFragment = document.createDocumentFragment(),
-            noteCloseButton = createElement("div", "note--close", self.config.closeIcon);
+            noteCloseButton = createElement("div", "note--close", self.config.closeIcon),
+            noteContent = createElement("div", "note--content");
 
+        if (title) {
+            note.classList.add("hasTitle");
+            noteContent.appendChild(createElement("h2", "note--title", title));
+        }
+
+        noteContent.appendChild(createElement("p", "note--body", content));
+
+        noteFragment.appendChild(noteContent);
         noteFragment.appendChild(noteCloseButton);
-
-        if (title) noteFragment.appendChild(createElement("h2", "note--title", title));
-
-        noteFragment.appendChild(createElement("p", "note--body", text));
 
         note.appendChild(noteFragment);
         self.innerContainer.appendChild(note);
@@ -66,10 +74,10 @@ var Note = function Note(config) {
             note.classList.remove("shown");
         };
 
-        noteCloseButton.addEventListener("click", hide);
+        note.addEventListener("click", hide);
         note.addEventListener("animationend", onAnimationEnd);
 
-        if (!noteConfig.stick && !self.config.stick) setTimeout(hide, (noteConfig.duration || self.config.duration) * 1000);
+        if (!noteConfig.sticky && !self.config.sticky) setTimeout(hide, (noteConfig.duration || self.config.duration) * 1000);
 
         return {
             hide: hide,

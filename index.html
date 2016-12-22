@@ -55,7 +55,9 @@
     }
 
     function info() {
-        note.info("Info", "Something happened.");
+        note.info("", "Something happened.", {
+            sticky: true
+        });
     }
 
     function warning() {
@@ -64,7 +66,7 @@
 
     function error() {
         note.error("Error", "Something went wrong.", {
-            stick: true
+            sticky: true
         });
     }
 	</script>

@@ -55,8 +55,8 @@ const Note = function (config) {
 
 		noteConfig = noteConfig || {};
 
-		let note = createElement("div", `note shown note--${type}`);
-		let noteFragment = document.createDocumentFragment(),
+		const note = createElement("div", `note shown note--${type}`);
+		const noteFragment = document.createDocumentFragment(),
 			noteCloseButton = createElement("div", "note--close", self.config.closeIcon),
 			noteContent = createElement("div", "note--content");
 
@@ -66,7 +66,6 @@ const Note = function (config) {
 		}
 
 		noteContent.appendChild(createElement("p", "note--body", content));
-
 
 		noteFragment.appendChild(noteContent);
 		noteFragment.appendChild(noteCloseButton);
